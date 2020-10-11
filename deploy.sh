@@ -15,6 +15,10 @@ git pull
 chown scripts:scripts -R /opt/$APP_NAME
 chmod u=rwX,g=srX,o=rX -R /opt/$APP_NAME
 
+# Install dependencies
+echo "Installing dependencies..."
+npm install
+
 # Build code
 echo "Building project..."
 npm run-script build
