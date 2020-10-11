@@ -1,13 +1,5 @@
-import Axios from "axios";
-import { PdfLinkDownloader } from "./PdfLinkDownloader";
+import { Scheduling } from "./Scheduling";
 
-PdfLinkDownloader.getNewest((link) => {
-  Axios.post(
-    "https://discordapp.com/api/webhooks/764516615806124083/ggkimYNiNX5KueRTdXNWPTZdkIAxT9sG7xdhOMzim-26ZO4rwZiltXN954OzZGH73H0p",
-    {
-      content: link,
-    }
-  ).then((res) => {
-    return 0;
-  });
+Scheduling.enable(() => {
+  console.log("Successfully started Essensplan-Arnfels...\n");
 });
