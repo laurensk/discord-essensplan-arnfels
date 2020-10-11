@@ -17,7 +17,7 @@ chmod u=rwX,g=srX,o=rX -R /opt/$APP_NAME
 
 # Build code
 echo "Building project..."
-npm build
+npm run-script build
 
 # Start service
 echo "Starting service $APP_NAME..."
