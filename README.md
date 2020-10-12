@@ -1,3 +1,3 @@
 # Discord Essensplan Arnfels
 
-Welcome!
+System dependencies: imagemagick, imagemagick

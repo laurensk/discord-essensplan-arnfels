@@ -1,21 +1,38 @@
 import Schedule from "node-schedule";
-import Axios from "axios";
 import { PdfLinkDownloader } from "./PdfLinkDownloader";
+import request from "request-promise-native";
+import fs from "fs";
+import pdf2img from "pdf2img";
+import { DiscordSender } from "./DiscordSender";
 
 export class Scheduling {
   public static enable(callback: Function) {
-    Schedule.scheduleJob("0 7 * * 1-5", function () {
-      PdfLinkDownloader.getNewest((link) => {
-        Axios.post(
-          "https://discordapp.com/api/webhooks/764516615806124083/ggkimYNiNX5KueRTdXNWPTZdkIAxT9sG7xdhOMzim-26ZO4rwZiltXN954OzZGH73H0p",
-          {
-            content: "Guten Morgen! Der Essensplan für heute: " + link,
-          }
-        ).then((res) => {
-          return 0;
-        });
+    Schedule.scheduleJob("0 7 * * 1", Scheduling.downloadAndSendImage);
+    callback();
+  }
+
+  public static downloadAndSendImage() {
+    PdfLinkDownloader.getNewest(async (link) => {
+      let pdfBuffer = await request.get({ uri: link, encoding: null });
+      fs.writeFileSync("essensplan.pdf", pdfBuffer);
+
+      var input = "essensplan.pdf";
+      console.log(input);
+
+      pdf2img.setOptions({
+        type: "png",
+        size: 1024,
+        density: 600,
+        outputdir: ".",
+        outputname: "essensplan",
+        page: null,
+        quality: 100,
+      });
+
+      pdf2img.convert(input, function (err) {
+        if (err) console.log(err);
+        else DiscordSender.sendImage();
       });
     });
-    callback();
   }
 }
