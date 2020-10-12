@@ -7,9 +7,9 @@ export class Scheduling {
     Schedule.scheduleJob("0 7 * * 1-5", function () {
       PdfLinkDownloader.getNewest((link) => {
         Axios.post(
-          "Guten Morgen! Der Essensplan für heute: https://discordapp.com/api/webhooks/764516615806124083/ggkimYNiNX5KueRTdXNWPTZdkIAxT9sG7xdhOMzim-26ZO4rwZiltXN954OzZGH73H0p",
+          "https://discordapp.com/api/webhooks/764516615806124083/ggkimYNiNX5KueRTdXNWPTZdkIAxT9sG7xdhOMzim-26ZO4rwZiltXN954OzZGH73H0p",
           {
-            content: link,
+            content: "Guten Morgen! Der Essensplan für heute: " + link,
           }
         ).then((res) => {
           return 0;
