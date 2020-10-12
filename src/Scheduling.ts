@@ -17,7 +17,6 @@ export class Scheduling {
       fs.writeFileSync("essensplan.pdf", pdfBuffer);
 
       var input = "essensplan.pdf";
-      console.log(input);
 
       pdf2img.setOptions({
         type: "png",
