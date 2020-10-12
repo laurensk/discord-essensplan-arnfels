@@ -1,3 +1,3 @@
 # Discord Essensplan Arnfels
 
-System dependencies: imagemagick, imagemagick
+System dependencies: imagemagick, graphicsmagick
